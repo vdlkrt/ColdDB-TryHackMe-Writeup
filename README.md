@@ -15,7 +15,7 @@ This machine simulates a typical web-to-root scenario. The goal is to exploit a 
 
 Initial full TCP port scan:
 
-```bash
+
 nmap -p- -T5 10.10.158.121
 
 Open ports found:
