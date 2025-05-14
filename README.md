@@ -27,7 +27,7 @@ Open ports found:
 
 Service/version detection:
 
-nmap -p 80,4512 -sV -A 10.10.158.121 -oN nmap.txt
+nmap -p 80,4512 -sV -A 10.10.158.121 -o nmap.txt
 
 ---
 
