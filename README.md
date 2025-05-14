@@ -39,7 +39,7 @@ p4512: (SSH on a non-standard port)
 
 Nothing obvious on the homepage. Using Gobuster:
 
-gobuster dir -u http://10.10.158.121 -w /usr/share/wordlists/rockyou.txt
+gobuster dir -u http://10.10.158.121 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 Discovered /Hidden, which contains a message:
 
