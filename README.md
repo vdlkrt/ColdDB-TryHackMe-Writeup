@@ -11,7 +11,7 @@ This machine simulates a typical web-to-root scenario. The goal is to exploit a 
 
 ---
 
-## 1. Port Scanning
+ 1. Port Scanning
 
 Initial full TCP port scan:
 
